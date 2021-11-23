@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+  <category>
+    <pattern>*</pattern>
+    <template>I have no answer for that.</template>
+  </category>
+  <category>
+    <pattern>HELLO</pattern>
+    <template>
+        Hello, I'm Grammar Buddy. What's your name?
+        <image>https://media.giphy.com/media/EEXOQc2PrhLwQ96uiP/giphy.gif</image>
+        <split/><delay>3</delay>
+        Would you like to learn about apostrophes?
+        <button>
+            <text>Yes!</text>
+            <postback>TELL ME ABOUT APOSTROPHES</postback>
+        </button>
+    </template>
+  </category>
+  <category>
+      <pattern>* *</pattern>
+      <that>WHAT IS YOUR NAME</that>
+      <template>Hello, <set name="fname"><star index="1"/></set>
+          <think>
+              <set name="lname"><star index="2"/></set>
+              <set name="names">2</set>
+          </think>
+      </template>
+  </category>
+  <category>
+      <pattern>*</pattern>
+      <that>WHAT IS YOUR NAME</that>
+      <template>
+          Hello, <set name="fname"><star index="1"/></set>
+          <think><set name="names">1</set></think>
+      </template>
+  </category>
+  <category>
+      <pattern># QUIT #</pattern>
+      <template>See you later!</template>
+  </category>
+  <category>
+      <pattern>MY NAME IS * *</pattern>
+      <template>Hello, <set name="fname"><star index="1"/></set>
+          <think>
+              <set name="lname"><star index="2"/></set>
+              <set name="names">2</set>
+          </think>
+      </template>
+  </category>
+  <category>
+      <pattern>DO YOU KNOW MY NAME</pattern>
+      <template>
+          <condition name="names">
+              <li value="unknown">I do not.</li>
+              <li value="2">Yes, it is <get name="fname"/> <get name="lname"/>.</li>
+              <li value="1">Yes, it is <get name="fname"/>.</li>
+              <li>Something went wrong!</li>
+          </condition>
+      </template>
+  </category>
+  <category>
+      <pattern>DO YOU REMEMBER MY NAME</pattern>
+      <template>
+          <srai>DO YOU KNOW MY NAME</srai>
+      </template>
+  </category>
+
+<category>
+    <pattern>TELL ME ABOUT APOSTROPHES</pattern>
+    <template>I'd be happy to tell you about apostrophes!<split/><delay>2</delay>Apostrophes are used for 3 different purposes:
+        <ol>
+            <li>Plurals</li>
+            <li>Omitted letters</li>
+            <li>Possessives</li> 
+        </ol>
+        Which would you like to know more about? You can answer with text or a number.</template>
+</category>
+<category>
+    <pattern>PLURALS</pattern>
+    <that>YOU CAN ANSWER WITH TEXT OR A NUMBER</that>
+    <template>
+        Apostrophes sometimes appear after a letter, number, or symbol 
+        and before an "s", as in: AOC graduated from college <em>cum laude</em>. 
+        She must have earned lots of A's.
+    </template>
+</category>
+<category>
+    <pattern>1</pattern>
+    <that>YOU CAN ANSWER WITH TEXT OR A NUMBER</that>
+    <template><srai>PLURALS</srai></template>
+</category>
+</aiml>
